@@ -1,0 +1,75 @@
+{
+  "name": "dailydiary",
+  "version": "1.0.0",
+  "description": "A local markdown diary app built with Electron + Vue 3",
+  "main": "electron/main.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "electron:dev": "cross-env VITE_DEV_SERVER_URL=http://localhost:5173 electron .",
+    "start": "concurrently \"npm run dev\" \"npm run electron:dev\"",
+    "electron:build": "npm run build && electron-builder",
+    "electron:pack": "electron-builder"
+  },
+  "build": {
+    "appId": "com.dailydiary.app",
+    "productName": "DailyDiary",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "dist/**/*",
+      "electron/**/*",
+      "package.json"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true
+    }
+  },
+  "keywords": [
+    "diary",
+    "markdown",
+    "electron",
+    "vue"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@vueuse/core": "^14.3.0",
+    "buffer": "^6.0.3",
+    "date-fns": "^4.4.0",
+    "docx": "^9.7.1",
+    "dompurify": "^3.4.7",
+    "flexsearch": "^0.8.212",
+    "gray-matter": "^4.0.3",
+    "marked": "^18.0.4",
+    "pinia": "^3.0.4",
+    "vue": "^3.5.35"
+  },
+  "devDependencies": {
+    "@types/dompurify": "^3.0.5",
+    "@types/node": "^25.9.1",
+    "@vitejs/plugin-vue": "^6.0.7",
+    "concurrently": "^10.0.3",
+    "cross-env": "^10.1.0",
+    "electron": "^42.3.2",
+    "electron-builder": "^26.8.1",
+    "typescript": "^6.0.3",
+    "vite": "^8.0.16",
+    "vue-tsc": "^3.3.3"
+  }
+}
